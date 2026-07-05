@@ -142,6 +142,15 @@ docker run --rm -v C:\Users\Usuario\Desktop\PORTFOLIO\YOLO:/workspace -w /worksp
 docker run --rm -v C:\Users\Usuario\Desktop\PORTFOLIO\YOLO:/workspace -w /workspace/yolov7/edge_optimization tensorflow/tensorflow:latest bash -c "pip install opencv-python-headless && python evaluate_accuracy.py"
 ```
 
+## Next Steps
+
+To build upon these optimization and quantization results, the following next steps are recommended:
+
+1. **Quantization-Aware Training (QAT)**: Execute QAT in PyTorch or TensorFlow before TFLite conversion to recover the ~4% match rate accuracy drop observed in the strict INT8 model.
+2. **Physical Accelerator Deployment**: Compile the strictly integer quantized `yolov7_tiny_int8.tflite` model using the Coral Edge TPU compiler (`edgetpu_compiler`) and deploy it to a physical Edge TPU USB accelerator or Raspberry Pi + Hailo NPU to benchmark hardware-accelerated latency.
+3. **C++ Inference Runtime**: Re-write the edge post-processing decoder (sigmoid activations, grid generation, NMS) in C++ utilizing `libtensorflow-lite.so` to eliminate Python runtime overhead and achieve sub-20ms latency.
+4. **CI/CD Regression Pipeline**: Integrate calibration, compilation, and evaluation scripts into a GitHub Actions CI/CD workflow to run automated regression tests whenever new model weights are committed.
+
 ---
 
 ## Original Repository Reference
