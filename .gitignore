@@ -261,3 +261,13 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+
+# YOLOv7-Tiny Edge Optimization Exclusions
+!edge_optimization/
+!edge_optimization/**
+
+# Keep datasets, binary tools, cache, and SavedModel directories ignored
+edge_optimization/data/coco128/
+edge_optimization/bin/benchmark_model
+edge_optimization/__pycache__/
+edge_optimization/models/yolov7-tiny_saved_model/
